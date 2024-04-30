@@ -275,6 +275,36 @@ export const routeForMenu: Array<RouteRecordRaw> = [
     component: () => import('../views/manage-friends'),
   },
   {
+    path: '/love-photos',
+    name: RouteName.LovePhoto,
+    meta: {
+      title: '爱的相册',
+      icon: <CommentsIcon />,
+    },
+    component: $RouterView,
+    children: [
+      {
+        path: 'list',
+        name: RouteName.ListLovePhoto,
+        meta: {
+          title: '相册描述',
+          query: { page: 1 },
+          icon: <EyeIcon />,
+        },
+        component: () => import('../views/manage-love-photos/list'),
+      },
+      {
+        path: 'edit',
+        name: RouteName.EditLovePhoto,
+        meta: {
+          title: '描述是啥呢',
+          icon: <PencilAltIcon />,
+        },
+        component: () => import('../views/manage-love-photos/edit'),
+      },
+    ],
+  },
+  {
     path: '/ai',
 
     name: RouteName.Ai,

@@ -19,6 +19,11 @@ export enum RouteName {
   Project = 'project',
   ListProject = 'project-list',
 
+
+  LovePhoto = 'love-photos',
+  ListLovePhoto = 'love-photos-list',
+  EditLovePhoto = 'love-photos-edit',
+
   EditProject = 'project-edit',
   Friend = 'friends',
   File = 'files',
