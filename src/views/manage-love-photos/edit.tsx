@@ -4,7 +4,7 @@ import { fetchHitokoto, SentenceType } from 'external/api/hitokoto'
 import { useParsePayloadIntoData } from 'hooks/use-parse-payload'
 import { ContentLayout } from 'layouts/content'
 import { isString, transform } from 'lodash-es'
-import { NForm, NFormItem, NInput, useDialog,NSwitch } from 'naive-ui'
+import { NForm, NFormItem, NInput, useDialog, NSwitch, NDatePicker, NSpace, NButton } from 'naive-ui'
 import { RouteName } from 'router/name'
 import { RESTManager } from 'utils'
 import {
@@ -21,11 +21,15 @@ import type { LovePhotoModel } from 'models/lovePhoto'
 
 type LovePhotoReactiveType = {
   title: string
-  descip: string
+  descrip: string
   colors: string
   time: string
   key: string
   hasPhotos: boolean
+  music: string
+  timePreffix: string,
+  timeSuffix: string,
+  detailMap: string
 }
 
 const EditLovePhoto = defineComponent({
@@ -35,11 +39,15 @@ const EditLovePhoto = defineComponent({
 
     const resetReactive: () => LovePhotoReactiveType = () => ({
       title: '',
-      descip: '',
+      descrip: '',
       colors: '',
       time: '',
       key: '',
       hasPhotos: true,
+      music: '',
+      timePreffix: '',
+      timeSuffix: '',
+      detailMap: ''
     })
 
     const placeholder = ref({} as LovePhotoModel)
@@ -56,7 +64,7 @@ const EditLovePhoto = defineComponent({
     onMounted(async () => {
       const $id = id.value
       if ($id && typeof $id == 'string') {
-        const payload = (await RESTManager.api.says($id).get({})) as any
+        const payload = (await RESTManager.api.lovePhotos($id).get({})) as any
 
         const data = payload.data
         parsePayloadIntoReactiveData(data as LovePhotoModel)
@@ -66,7 +74,7 @@ const EditLovePhoto = defineComponent({
     const handleSubmit = async () => {
       const parseDataToPayload = (): { [key in keyof LovePhotoModel]?: any } => {
         try {
-          if (!data.descip || data.descip.trim().length == 0) {
+          if (!data.descrip || data.descrip.trim().length == 0) {
             throw '描述为空'
           }
 
@@ -83,7 +91,9 @@ const EditLovePhoto = defineComponent({
                 res
               ),
             ),
-            // descip: data.descip.trim(),
+            descrip: data.descrip.trim(),
+            music: data.music.trim(),
+            detailMap: data.detailMap.trim()
           }
         } catch (e) {
           message.error(e as any)
@@ -140,7 +150,7 @@ const EditLovePhoto = defineComponent({
           <NFormItem
             label="标题"
             labelPlacement="left"
-            labelStyle={{ width: '4rem' }}
+            labelStyle={{ width: '5rem' }}
           >
             <NInput
               placeholder={placeholder.value.title}
@@ -180,9 +190,27 @@ const EditLovePhoto = defineComponent({
             labelStyle={{ width: '4rem' }}
           >
             <NInput
-              placeholder={placeholder.value.time}
-              value={data.time}
-              onInput={(e) => void (data.time = e)}
+              placeholder="输入前缀"
+              value={data.timePreffix}
+              onInput={(e) => void (data.timePreffix = e)}
+              style={{ width: '10rem' }}
+            ></NInput>
+            <NDatePicker
+              type="date"
+              placeholder="选择日期"
+              clearable
+              value={data.time ? +new Date(data.time) : undefined}
+              onUpdateValue={(e) => {
+                console.log("e:", e);
+                data.time = e ? new Date(e) : null
+              }}
+            >
+            </NDatePicker>
+            <NInput
+              placeholder="输入后缀"
+              value={data.timeSuffix}
+              onInput={(e) => void (data.timeSuffix = e)}
+              style={{ width: '10rem' }}
             ></NInput>
           </NFormItem>
           <NFormItem
@@ -196,12 +224,40 @@ const EditLovePhoto = defineComponent({
               onInput={(e) => void (data.key = e)}
             ></NInput>
           </NFormItem>
-          <NFormItem label="有相册">
-              <NSwitch
-                value={data.hasPhotos}
-                onUpdateValue={(e) => void (data.hasPhotos = e)}
-              />
-            </NFormItem>
+          <NFormItem
+            label="标题目录映射"
+            required
+            labelPlacement="left"
+            labelStyle={{ width: '4rem' }}
+          >
+            <NInput
+              type="textarea"
+              autofocus
+              autosize={{ minRows: 6, maxRows: 8 }}
+              placeholder={placeholder.value.detailMap}
+              value={data.detailMap}
+              onInput={(e) => void (data.detailMap = e)}
+            ></NInput>
+          </NFormItem>
+          <NFormItem label="有相册"
+            labelPlacement="left"
+            labelStyle={{ width: '4rem' }}>
+            <NSwitch
+              value={data.hasPhotos}
+              onUpdateValue={(e) => void (data.hasPhotos = e)}
+            />
+          </NFormItem>
+          <NFormItem
+            label="音乐url"
+            labelPlacement="left"
+            labelStyle={{ width: '4rem' }}
+          >
+            <NInput
+              placeholder={placeholder.value.music}
+              value={data.music}
+              onInput={(e) => void (data.music = e)}
+            ></NInput>
+          </NFormItem>
         </NForm>
       </ContentLayout>
     )

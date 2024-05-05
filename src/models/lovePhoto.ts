@@ -7,7 +7,10 @@ export interface LovePhotoModel {
   colors?: string
   time?: string
   key?: string
-  hasPhotos?: string
+  hasPhotos?: boolean
+  music?: string
+  timePreffix?: string,
+  timeSuffix?: string,
 }
 
 export interface LovePhotoResponse {

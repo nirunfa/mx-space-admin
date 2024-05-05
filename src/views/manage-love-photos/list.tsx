@@ -24,7 +24,7 @@ const ManageLovePhotoListView = defineComponent({
               params: {
                 page,
                 size,
-                select: 'title text _id id created modified author source',
+                select: 'title descrip time colors hasPhotos key created music timePreffix timeSuffix detailMap',
               },
             })
             data.value = response.data
@@ -72,11 +72,28 @@ const ManageLovePhotoListView = defineComponent({
             title: '标题',
             key: 'title',
           },
-          { title: '描述', key: 'descrip' },
+          { title: '描述', key: 'descrip' ,ellipsis: true,cellProps(row){
+            return {
+              title:row.descrip
+            };
+          }},
           { title: '颜色值', key: 'colors' },
           { title: '日期', key: 'time' },
           { title: '标识tag', key: 'key' },
-          { title: '相册', key: 'hasPhotos' },
+          { title: '相册', key: 'hasPhotos',render (row) {
+              return row.hasPhotos?'有':'无'
+            } 
+          },
+          { title: '音乐地址', key: 'music',ellipsis: true,cellProps(row){
+            return {
+              title:row.music
+            };
+          }},
+          { title: '标题映射', key: 'detailMap',ellipsis: true,cellProps(row){
+            return {
+              title:row.detailMap
+            };
+          }},
           {
             title: '操作',
             fixed: 'right',
@@ -94,7 +111,7 @@ const ManageLovePhotoListView = defineComponent({
                     positiveText={'取消'}
                     negativeText="删除"
                     onNegativeClick={async () => {
-                      await RESTManager.api.says(row.id).delete()
+                      await RESTManager.api.lovePhotos(row.id).delete()
                       message.success('删除成功')
                       await fetchData(pager.value.currentPage)
                     }}
@@ -143,7 +160,7 @@ const ManageLovePhotoListView = defineComponent({
                   onDelete={async () => {
                     const status = await Promise.allSettled(
                       checkedRowKeys.value.map((id) =>
-                        RESTManager.api.says(id as string).delete(),
+                        RESTManager.api.lovePhotos(id as string).delete(),
                       ),
                     )
 
