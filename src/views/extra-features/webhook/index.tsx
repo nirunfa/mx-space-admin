@@ -92,7 +92,7 @@ export default defineComponent({
                                 <div class={'space-x-2'}>
                                   {item.events.map((event) => {
                                     return (
-                                      <NTag size="small" type="success" round>
+                                      <NTag size="small" type="primary" round>
                                         {event}
                                       </NTag>
                                     )

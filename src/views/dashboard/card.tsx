@@ -67,7 +67,7 @@ export const Card = defineComponent({
                             {i.name}
                           </NButton>
                         ) : (
-                          <NButton quaternary onClick={i.onClick}>
+                          <NButton text onClick={i.onClick}>
                             {i.name}
                           </NButton>
                         )

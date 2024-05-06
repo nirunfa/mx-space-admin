@@ -1,5 +1,72 @@
 # CHANGELOG
 
+## [4.4.2](https://github.com/mx-space/mx-admin/compare/v4.4.1...v4.4.2) (2024-05-05)
+
+
+### Bug Fixes
+
+* naive ui button ([19f5d67](https://github.com/mx-space/mx-admin/commit/19f5d670028e2dbe34ba8d43e7759de08e1f27f0))
+
+
+
+## [4.4.1](https://github.com/mx-space/mx-admin/compare/v4.4.0...v4.4.1) (2024-05-05)
+
+
+### Bug Fixes
+
+* asset path in page proxy ([612980c](https://github.com/mx-space/mx-admin/commit/612980cd8aaebfd7aac5cd950e04574a901eb8e8))
+
+
+
+# [4.4.0](https://github.com/mx-space/mx-admin/compare/v4.3.4...v4.4.0) (2024-05-04)
+
+
+### Features
+
+* ai helper ([c31cc75](https://github.com/mx-space/mx-admin/commit/c31cc759b78b9f326032f1809a1ea008000ff2ae))
+
+
+
+## [4.3.4](https://github.com/mx-space/mx-admin/compare/v4.3.3...v4.3.4) (2024-05-04)
+
+
+
+## [4.3.3](https://github.com/mx-space/mx-admin/compare/v4.3.2...v4.3.3) (2024-05-03)
+
+
+### Bug Fixes
+
+* generate ai summary modal ([270044b](https://github.com/mx-space/mx-admin/commit/270044b602242aeb378d6c5b468a77a70335d2bf))
+
+
+
+## [4.3.2](https://github.com/mx-space/mx-admin/compare/v4.3.1...v4.3.2) (2024-05-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @antv/g2 to ^4.2.11 ([#883](https://github.com/mx-space/mx-admin/issues/883)) ([d7e370d](https://github.com/mx-space/mx-admin/commit/d7e370de2868a6a215e3ca3be478405f716e5a36))
+* **deps:** update dependency @mx-space/api-client to v1.12.1 ([#887](https://github.com/mx-space/mx-admin/issues/887)) ([2b8a9d4](https://github.com/mx-space/mx-admin/commit/2b8a9d4d90138b97da09241f499cb60dfb3d9496))
+* **deps:** update dependency ejs to v3.1.10 [security] ([#898](https://github.com/mx-space/mx-admin/issues/898)) ([df4808b](https://github.com/mx-space/mx-admin/commit/df4808b5827b0076b2bdfee17e5ccadb9e77088a))
+* **deps:** update dependency qs to v6.12.1 ([#885](https://github.com/mx-space/mx-admin/issues/885)) ([fec6b07](https://github.com/mx-space/mx-admin/commit/fec6b078964aff605a25e6a0b9ff4a14014cf12c))
+
+
+### Features
+
+* update theme ([76fb1dc](https://github.com/mx-space/mx-admin/commit/76fb1dcc779b8d6134d5a0ea3aba764035440e04))
+* uwu ([223eb6f](https://github.com/mx-space/mx-admin/commit/223eb6fbe64c947e26f32affa823e6cf1f70e54f))
+
+
+
+## [4.3.1](https://github.com/mx-space/mx-admin/compare/v4.3.0...v4.3.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* add ai summary pagination component ([557d287](https://github.com/mx-space/mx-admin/commit/557d287ef5e1ac7da489aef34ef6fea37e601135))
+
+
+
 # [4.3.0](https://github.com/mx-space/mx-admin/compare/v4.2.8...v4.3.0) (2024-04-26)
 
 

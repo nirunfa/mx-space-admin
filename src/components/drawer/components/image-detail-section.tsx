@@ -10,9 +10,9 @@ import {
   NInput,
   NInputNumber,
 } from 'naive-ui'
-import { getDominantColor } from 'utils/image'
-import { isVideoExt, pickImagesFromMarkdown } from 'utils/markdown'
-import type { Image as ImageModel } from 'models/base'
+import { getDominantColor } from '~/utils/image'
+import { isVideoExt, pickImagesFromMarkdown } from '~/utils/markdown'
+import type { Image as ImageModel } from '~/models/base'
 import type { PropType } from 'vue'
 
 export const ImageDetailSection = defineComponent({
@@ -120,7 +120,7 @@ export const ImageDetailSection = defineComponent({
               const $image = new Image()
               $image.src = item.src
               $image.crossOrigin = 'Anonymous'
-              $image.onload = () => {
+              $image.addEventListener('load', () => {
                 resolve({
                   width: $image.naturalWidth,
                   height: $image.naturalHeight,
@@ -128,7 +128,7 @@ export const ImageDetailSection = defineComponent({
                   type: ext,
                   accent: getDominantColor($image),
                 })
-              }
+              })
               $image.onerror = (err) => {
                 reject({
                   err,

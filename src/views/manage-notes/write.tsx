@@ -1,16 +1,16 @@
-import { HeaderActionButton } from 'components/button/rounded-button'
-import { TextBaseDrawer } from 'components/drawer/text-base-drawer'
-import { SlidersHIcon, TelegramPlaneIcon } from 'components/icons'
-import { MaterialInput } from 'components/input/material-input'
-import { GetLocationButton } from 'components/location/get-location-button'
-import { SearchLocationButton } from 'components/location/search-button'
-import { ParseContentButton } from 'components/special-button/parse-content'
-import { WEB_URL } from 'constants/env'
-import { MOOD_SET, WEATHER_SET } from 'constants/note'
+import { WEB_URL } from '~/constants/env'
+import { MOOD_SET, WEATHER_SET } from '~/constants/note'
+import { HeaderActionButton } from '~/components/button/rounded-button'
+import { TextBaseDrawer } from '~/components/drawer/text-base-drawer'
+import { SlidersHIcon, TelegramPlaneIcon } from '~/components/icons'
+import { MaterialInput } from '~/components/input/material-input'
+import { GetLocationButton } from '~/components/location/get-location-button'
+import { SearchLocationButton } from '~/components/location/search-button'
+import { ParseContentButton } from '~/components/special-button/parse-content'
 import { add } from 'date-fns'
-import { useAutoSave, useAutoSaveInEditor } from 'hooks/use-auto-save'
-import { useParsePayloadIntoData } from 'hooks/use-parse-payload'
-import { ContentLayout } from 'layouts/content'
+import { useAutoSave, useAutoSaveInEditor } from '~/hooks/use-auto-save'
+import { useParsePayloadIntoData } from '~/hooks/use-parse-payload'
+import { ContentLayout } from '~/layouts/content'
 import { isString } from 'lodash-es'
 import {
   NButton,
@@ -23,9 +23,9 @@ import {
   NSwitch,
   useMessage,
 } from 'naive-ui'
-import { RouteName } from 'router/name'
-import { RESTManager } from 'utils/rest'
-import { getDayOfYear } from 'utils/time'
+import { RouteName } from '~/router/name'
+import { RESTManager } from '~/utils/rest'
+import { getDayOfYear } from '~/utils/time'
 import {
   computed,
   defineComponent,
@@ -37,20 +37,19 @@ import {
   watch,
 } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import type { PaginateResult } from '@mx-space/api-client'
-import type { Coordinate, NoteModel } from 'models/note'
-import type { TopicModel } from 'models/topic'
-import type { WriteBaseType } from 'shared/types/base'
-
 import { Icon } from '@vicons/utils'
-
+import { AiHelperButton } from '~/components/ai/ai-helper'
 import { Editor } from '~/components/editor/universal'
 import { HeaderPreviewButton } from '~/components/special-button/preview'
 import { EmitKeyMap } from '~/constants/keys'
+import type { PaginateResult } from '@mx-space/api-client'
+import type { Coordinate, NoteModel } from '~/models/note'
+import type { TopicModel } from '~/models/topic'
+import type { WriteBaseType } from 'shared/types/base'
 
 const CrossBellConnectorIndirector = defineAsyncComponent({
   loader: () =>
-    import('components/xlog-connect').then(
+    import('~/components/xlog-connect').then(
       (mo) => mo.CrossBellConnectorIndirector,
     ),
   suspensible: true,
@@ -204,7 +203,7 @@ const NoteWriteView = defineComponent(() => {
         publicAt: data.publicAt
           ? (() => {
               const date = new Date(data.publicAt)
-              if (+date - +new Date() <= 0) {
+              if (+date - Date.now() <= 0) {
                 return null
               } else {
                 return date
@@ -214,7 +213,9 @@ const NoteWriteView = defineComponent(() => {
       }
     }
 
-    const { CrossBellConnector } = await import('components/xlog-connect/class')
+    const { CrossBellConnector } = await import(
+      '~/components/xlog-connect/class'
+    )
 
     if (id.value) {
       // update
@@ -295,14 +296,22 @@ const NoteWriteView = defineComponent(() => {
       }
     >
       <CrossBellConnectorIndirector />
-      <MaterialInput
-        class="relative z-10 mt-3"
-        label={defaultTitle.value}
-        value={data.title}
-        onChange={(e) => {
-          data.title = e
-        }}
-      ></MaterialInput>
+      <div class={'relative'}>
+        <MaterialInput
+          class="relative z-10 mt-3"
+          label={defaultTitle.value}
+          value={data.title}
+          onChange={(e) => {
+            data.title = e
+          }}
+        ></MaterialInput>
+
+        {data.text.length > 0 && (
+          <div class={'absolute bottom-0 right-0 top-0 z-10 flex items-center'}>
+            <AiHelperButton reactiveData={data} />
+          </div>
+        )}
+      </div>
 
       <div class={'py-3 text-gray-500'}>
         <label>{`${WEB_URL}/notes/${nid.value ?? ''}`}</label>
@@ -437,7 +446,7 @@ const NoteWriteView = defineComponent(() => {
         <NFormItem label="公开时间" labelAlign="right" labelPlacement="left">
           <NDatePicker
             type="datetime"
-            isDateDisabled={(ts: number) => +new Date(ts) - +new Date() < 0}
+            isDateDisabled={(ts: number) => +new Date(ts) - Date.now() < 0}
             placeholder="选择时间"
             clearable
             value={data.publicAt ? +new Date(data.publicAt) : undefined}

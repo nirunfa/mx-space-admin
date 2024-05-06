@@ -1,7 +1,7 @@
 import { NButton, NInput, NSpace, useDialog } from 'naive-ui'
-import { RESTManager } from 'utils'
+import { RESTManager } from '~/utils'
 import { ref } from 'vue'
-import type { RecentlyModel } from 'models/recently'
+import type { RecentlyModel } from '~/models/recently'
 
 export const useShorthand = () => {
   const modal = useDialog()
@@ -46,8 +46,8 @@ export const useShorthand = () => {
                         dialog.destroy()
                         resolve(res)
                       })
-                      .catch((err) => {
-                        reject(err)
+                      .catch((error) => {
+                        reject(error)
                       })
                   }}
                 >

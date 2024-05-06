@@ -1,12 +1,4 @@
 import {
-  PencilAltIcon,
-  PlusIcon,
-  SearchIcon,
-  TrashIcon,
-} from 'components/icons'
-import { IframePreviewButton } from 'components/special-button/iframe-preview'
-import { UploadWrapper } from 'components/upload'
-import {
   NAvatar,
   NButton,
   NButtonGroup,
@@ -22,15 +14,24 @@ import {
   NThing,
   NUploadDragger,
 } from 'naive-ui'
-import { RESTManager } from 'utils'
-import { buildMarkdownRenderUrl } from 'utils/endpoint'
-import { textToBigCharOrWord } from 'utils/word'
 import { useRouter } from 'vue-router'
 import type { NoteModel, Pager, PaginateResult } from '@mx-space/api-client'
-import type { TopicModel } from 'models/topic'
+import type { TopicModel } from '~/models/topic'
 import type { PropType } from 'vue'
 
 import { Icon as NIcon } from '@vicons/utils'
+
+import {
+  PencilAltIcon,
+  PlusIcon,
+  SearchIcon,
+  TrashIcon,
+} from '~/components/icons'
+import { IframePreviewButton } from '~/components/special-button/iframe-preview'
+import { UploadWrapper } from '~/components/upload'
+import { RESTManager } from '~/utils'
+import { buildMarkdownRenderUrl } from '~/utils/endpoint'
+import { textToBigCharOrWord } from '~/utils/word'
 
 import { useMemoNoteList } from '../hooks/use-memo-note-list'
 
@@ -157,7 +158,7 @@ export const TopicDetail = defineComponent({
                               (e.event?.target as XMLHttpRequest).responseText,
                             )
                             message.warning(res.message)
-                          } catch (err) {}
+                          } catch {}
                           return e.file
                         }}
                       >
@@ -284,7 +285,7 @@ export const TopicDetail = defineComponent({
                         }}
                         page={notePagination.value.currentPage}
                         pageCount={notePagination.value.totalPage}
-                      ></NPagination>
+                      />
                     )}
                   </div>
                 </div>
@@ -371,7 +372,7 @@ const AddNoteToThisTopicButton = defineComponent({
       <>
         <NButton
           secondary
-          type="success"
+          type="primary"
           circle
           onClick={() => {
             modalShow.value = true
@@ -397,7 +398,7 @@ const AddNoteToThisTopicButton = defineComponent({
                   <div class={'text-right'}>
                     <NButton
                       round
-                      type="success"
+                      type="primary"
                       onClick={() => handleAddNoteToThisTopic()}
                     >
                       添加！

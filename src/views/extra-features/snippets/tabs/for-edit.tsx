@@ -1,10 +1,10 @@
-import { HeaderActionButton } from 'components/button/rounded-button'
-import { CheckCircleOutlinedIcon } from 'components/icons'
-import { KVEditor } from 'components/kv-editor'
+import { HeaderActionButton } from '~/components/button/rounded-button'
+import { CheckCircleOutlinedIcon } from '~/components/icons'
+import { KVEditor } from '~/components/kv-editor'
 import { dump, load } from 'js-yaml'
 import JSON5 from 'json5'
-import { useLayout } from 'layouts/content'
-import { TwoColGridLayout } from 'layouts/two-col'
+import { useLayout } from '~/layouts/content'
+import { TwoColGridLayout } from '~/layouts/two-col'
 import { omit } from 'lodash-es'
 import {
   NForm,
@@ -17,7 +17,7 @@ import {
   NSwitch,
   useMessage,
 } from 'naive-ui'
-import { RESTManager } from 'utils'
+import { RESTManager } from '~/utils'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useStorage } from '@vueuse/core'
@@ -25,10 +25,10 @@ import { useStorage } from '@vueuse/core'
 import { useMountAndUnmount } from '~/hooks/use-lifecycle'
 
 import {
-  defaultServerlessFunction,
   SnippetModel,
   SnippetType,
   SnippetTypeToLanguage,
+  defaultServerlessFunction,
 } from '../../../../models/snippet'
 import { CodeEditorForSnippet } from '../components/code-editor'
 import { InstallDependencyButton } from '../components/install-dep-button'
@@ -342,14 +342,19 @@ export const Tab2ForEdit = defineComponent({
                 <NFormItem label="请求方式">
                   <NSelect
                     disabled={isBuiltFunction.value}
-                    options={['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'ALL'].map(
-                      (v) => {
-                        return {
-                          label: v,
-                          value: v,
-                        }
-                      },
-                    )}
+                    options={[
+                      'GET',
+                      'POST',
+                      'PUT',
+                      'DELETE',
+                      'PATCH',
+                      'ALL',
+                    ].map((v) => {
+                      return {
+                        label: v,
+                        value: v,
+                      }
+                    })}
                     value={data.value.method}
                     onUpdateValue={(value) => {
                       data.value.method = value

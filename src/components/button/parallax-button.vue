@@ -1,21 +1,7 @@
-<template>
-  <button
-    ref="parallaxBtn"
-    class="parallax-btn pr"
-    :data-title="title"
-    :class="type"
-    :style="{ color: forecolor }"
-    @mousemove="move"
-    @mouseup="up"
-    @mousedown="down"
-    @mouseleave="leave"
-  />
-</template>
-
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useStoreRef } from 'hooks/use-store-ref'
-import { UIStore } from 'stores/ui'
+import { useStoreRef } from '~/hooks/use-store-ref'
+import { UIStore } from '~/stores/ui'
 import { defineComponent, onMounted, ref } from 'vue'
 import type { PropType } from 'vue'
 
@@ -81,6 +67,20 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <button
+    ref="parallaxBtn"
+    class="parallax-btn pr"
+    :data-title="title"
+    :class="type"
+    :style="{ color: forecolor }"
+    @mousemove="move"
+    @mouseup="up"
+    @mousedown="down"
+    @mouseleave="leave"
+  />
+</template>
 
 <style lang="postcss">
 .parallax-btn {

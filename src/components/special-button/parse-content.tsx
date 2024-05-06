@@ -1,6 +1,6 @@
-import { HeaderActionButton } from 'components/button/rounded-button'
-import { PlainEditor } from 'components/editor/plain/plain'
-import { QuestionCircleIcon, SlackHashIcon } from 'components/icons'
+import { HeaderActionButton } from '~/components/button/rounded-button'
+import { PlainEditor } from '~/components/editor/plain/plain'
+import { QuestionCircleIcon, SlackHashIcon } from '~/components/icons'
 import { load } from 'js-yaml'
 import {
   NButton,
@@ -13,9 +13,8 @@ import {
   NText,
 } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
-import type { PropType } from 'vue'
-
 import { Icon } from '@vicons/utils'
+import type { PropType } from 'vue'
 
 export const ParseContentButton = defineComponent({
   props: {

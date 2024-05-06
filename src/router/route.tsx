@@ -19,7 +19,7 @@ import {
   LogIcon,
   MarkdownIcon,
   MidHammer,
-  OpenAI,
+  OpenAIIcon,
   PencilAltIcon,
   PencilIcon,
   PuzzlePieceIcon,
@@ -31,10 +31,9 @@ import {
   UndoAltIcon,
   UserFriendsIcon,
   WebhookIcon,
-} from 'components/icons'
-import $RouterView from 'layouts/router-view'
-import { DashBoardView } from 'views/dashboard'
-import type { RouteRecordRaw } from 'vue-router'
+} from '~/components/icons'
+import $RouterView from '~/layouts/router-view'
+import { DashBoardView } from '~/views/dashboard'
 
 import { AppLayout } from '~/layouts/app-layout'
 import { ManagePostListView } from '~/views/manage-posts/list'
@@ -46,6 +45,7 @@ import { ManageNoteListView } from '../views/manage-notes/list'
 import ManageNoteWrite from '../views/manage-notes/write'
 import ManagePostsWrite from '../views/manage-posts/write'
 import { RouteName } from './name'
+import type { RouteRecordRaw } from 'vue-router'
 
 export const routeForMenu: Array<RouteRecordRaw> = [
   {
@@ -310,7 +310,7 @@ export const routeForMenu: Array<RouteRecordRaw> = [
     name: RouteName.Ai,
     meta: {
       title: 'AI',
-      icon: <OpenAI />,
+      icon: <OpenAIIcon />,
     },
 
     redirect: '/ai/summary',
@@ -320,7 +320,7 @@ export const routeForMenu: Array<RouteRecordRaw> = [
         name: RouteName.AiSummary,
         meta: {
           title: '摘要',
-          icon: <OpenAI />,
+          icon: <OpenAIIcon />,
         },
         component: () => import('../views/ai/summary'),
       },
@@ -501,7 +501,7 @@ export const routes: RouteRecordRaw[] = [
           ([path, comp]) => ({
             path: path
               .split('/')
-              .slice(-1)[0]
+              .at(-1)
               .replace(/\.[jt]sx$/, ''),
             component: comp,
           }),

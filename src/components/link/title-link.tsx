@@ -1,10 +1,10 @@
-import { ExternalLinkIcon, OpenAI } from 'components/icons'
-import { IframePreviewButton } from 'components/special-button/iframe-preview'
-import { WEB_URL } from 'constants/env'
-import { useStoreRef } from 'hooks/use-store-ref'
+import { WEB_URL } from '~/constants/env'
+import { ExternalLinkIcon, OpenAIIcon } from '~/components/icons'
+import { IframePreviewButton } from '~/components/special-button/iframe-preview'
+import { useStoreRef } from '~/hooks/use-store-ref'
 import { NButton, NEllipsis, NPopover } from 'naive-ui'
-import { UIStore } from 'stores/ui'
-import { buildMarkdownRenderUrl } from 'utils/endpoint'
+import { UIStore } from '~/stores/ui'
+import { buildMarkdownRenderUrl } from '~/utils/endpoint'
 import { defineComponent } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 
@@ -125,9 +125,10 @@ export const TableTitleLink = defineComponent({
             name: RouteName.AiSummary,
             query: { refId: props.id },
           }}
+          class={'flex items-center'}
         >
           <Icon>
-            <OpenAI />
+            <OpenAIIcon />
           </Icon>
         </RouterLink>
       </RouterLink>

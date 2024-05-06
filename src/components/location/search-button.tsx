@@ -1,4 +1,4 @@
-import { SearchIcon } from 'components/icons'
+import { SearchIcon } from '~/components/icons'
 import { debounce } from 'lodash-es'
 import {
   NAutoComplete,
@@ -9,13 +9,12 @@ import {
   NModal,
   NSpace,
 } from 'naive-ui'
-import { RESTManager } from 'utils/rest'
+import { RESTManager } from '~/utils/rest'
 import { defineComponent, ref, watch } from 'vue'
-import type { AMapSearch } from 'models/amap'
+import { Icon } from '@vicons/utils'
+import type { AMapSearch } from '~/models/amap'
 import type { AutoCompleteOption } from 'naive-ui/lib/auto-complete/src/interface'
 import type { PropType } from 'vue'
-
-import { Icon } from '@vicons/utils'
 
 export const SearchLocationButton = defineComponent({
   props: {

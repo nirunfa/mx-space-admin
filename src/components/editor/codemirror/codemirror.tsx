@@ -1,5 +1,5 @@
 /* eslint-disable vue/no-setup-props-destructure */
-import { useSaveConfirm } from 'hooks/use-save-confirm'
+import { useSaveConfirm } from '~/hooks/use-save-confirm'
 import { defineComponent } from 'vue'
 import type { EditorState } from '@codemirror/state'
 import type { PropType } from 'vue'
@@ -64,7 +64,7 @@ export const CodemirrorEditor = defineComponent({
     )
 
     return () => (
-      <div class={[styles['editor'], props.className]} ref={refContainer} />
+      <div class={[styles.editor, props.className]} ref={refContainer} />
     )
   },
 })

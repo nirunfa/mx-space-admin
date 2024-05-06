@@ -1,4 +1,3 @@
-import { Xterm } from 'components/xterm'
 import {
   NButton,
   NCard,
@@ -8,7 +7,9 @@ import {
   NSelect,
   NSpin,
 } from 'naive-ui'
-import { RESTManager } from 'utils'
+
+import { Xterm } from '~/components/xterm'
+import { RESTManager } from '~/utils'
 
 export const LogListView = defineComponent({
   setup() {
@@ -93,7 +94,7 @@ export const LogListView = defineComponent({
                             <div class="flex space-x-2">
                               <NButton
                                 ghost
-                                type="success"
+                                type="primary"
                                 onClick={() => {
                                   RESTManager.api.health
                                     .log(logType.value)

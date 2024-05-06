@@ -4,26 +4,26 @@ import {
   EyeHideIcon,
   HeartIcon,
   PlusIcon,
-} from 'components/icons'
-import { TableTitleLink } from 'components/link/title-link'
-import { DeleteConfirmButton } from 'components/special-button/delete-confirm'
-import { Table } from 'components/table'
-import { EditColumn } from 'components/table/edit-column'
-import { RelativeTime } from 'components/time/relative-time'
-import { useDataTableFetch } from 'hooks/use-table'
+} from '~/components/icons'
+import { TableTitleLink } from '~/components/link/title-link'
+import { DeleteConfirmButton } from '~/components/special-button/delete-confirm'
+import { Table } from '~/components/table'
+import { EditColumn } from '~/components/table/edit-column'
+import { RelativeTime } from '~/components/time/relative-time'
+import { useDataTableFetch } from '~/hooks/use-table'
 import { NButton, NEllipsis, NPopconfirm, NSpace, useMessage } from 'naive-ui'
-import { formatNumber } from 'utils/number'
+import { formatNumber } from '~/utils/number'
 import { defineComponent, onMounted, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Pager } from 'models/base'
-import type { NoteModel } from 'models/note'
-import type { TableColumns } from 'naive-ui/lib/data-table/src/interface'
 
 import { Icon } from '@vicons/utils'
 
 import { HeaderActionButton } from '../../components/button/rounded-button'
 import { ContentLayout } from '../../layouts/content'
 import { RESTManager } from '../../utils/rest'
+import type { TableColumns } from 'naive-ui/lib/data-table/src/interface'
+import type { NoteModel } from '~/models/note'
+import type { Pager } from '~/models/base'
 
 export const ManageNoteListView = defineComponent({
   name: 'NoteList',
@@ -95,7 +95,7 @@ export const ManageNoteListView = defineComponent({
 
             render(row) {
               const isSecret =
-                row.publicAt && +new Date(row.publicAt) - +new Date() > 0
+                row.publicAt && +new Date(row.publicAt) - Date.now() > 0
               return (
                 <TableTitleLink
                   inPageTo={`/notes/edit?id=${row.id}`}

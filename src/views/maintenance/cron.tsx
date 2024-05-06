@@ -1,9 +1,10 @@
-import { Table } from 'components/table'
 import { format } from 'date-fns'
-import { useDataTableFetch } from 'hooks/use-table'
-import { ContentLayout } from 'layouts/content'
 import { NButton, NPopconfirm, NSpace } from 'naive-ui'
-import { RESTManager, toPascalCase } from 'utils'
+
+import { Table } from '~/components/table'
+import { useDataTableFetch } from '~/hooks/use-table'
+import { ContentLayout } from '~/layouts/content'
+import { RESTManager, toPascalCase } from '~/utils'
 
 export default defineComponent({
   setup() {
@@ -91,7 +92,7 @@ export default defineComponent({
                       {{
                         trigger() {
                           return (
-                            <NButton size="tiny" quaternary type="success">
+                            <NButton size="tiny" quaternary type="primary">
                               执行
                             </NButton>
                           )

@@ -100,6 +100,7 @@
 .root.collapse {
   & .collapse-button {
     @apply absolute left-0 right-0 m-auto;
+    @apply flex w-full items-center justify-center py-6;
 
     & .collapse-icon {
       @apply rotate-180 transform;
@@ -108,10 +109,6 @@
 
   & .toggle-color-btn {
     @apply -left-10 opacity-0;
-  }
-
-  & .collapse-button {
-    @apply relative flex w-full items-center justify-center py-6;
   }
 }
 
@@ -136,7 +133,7 @@
 
   & .active,
   & .expand {
-    background: #50b694;
+    background: theme(colors.primary.default);
     border-radius: 24px 0 0 24px;
   }
 
@@ -153,7 +150,7 @@
   }
 
   & .item:hover {
-    background: #5eaa91;
+    background: theme(colors.primary.shallow);
     border-radius: 24px 0 0 24px;
   }
 
@@ -162,7 +159,11 @@
   }
 
   & .sidebar {
-    background: linear-gradient(to bottom, rgb(42, 148, 125), #75ad9b);
+    background: linear-gradient(
+      to bottom,
+      theme(colors.primary.default),
+      theme(colors.primary.shallow)
+    );
   }
 
   & .menu {
