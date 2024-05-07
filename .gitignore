@@ -5,7 +5,7 @@ dist-ssr
 *.local
 bundle-analyze
 stats.html
-.env.development
+.env.production
 
 /src/views/dev
 g.d.ts
