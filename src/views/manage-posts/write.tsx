@@ -1,13 +1,3 @@
-import { WEB_URL } from '~/constants/env'
-import { HeaderActionButton } from '~/components/button/rounded-button'
-import { TextBaseDrawer } from '~/components/drawer/text-base-drawer'
-import { SlidersHIcon, TelegramPlaneIcon } from '~/components/icons'
-import { MaterialInput } from '~/components/input/material-input'
-import { UnderlineInput } from '~/components/input/underline-input'
-import { ParseContentButton } from '~/components/special-button/parse-content'
-import { CrossBellConnectorIndirector } from '~/components/xlog-connect'
-import { useStoreRef } from '~/hooks/use-store-ref'
-import { ContentLayout } from '~/layouts/content'
 import { isString } from 'lodash-es'
 import {
   NDynamicTags,
@@ -18,23 +8,38 @@ import {
   NSwitch,
   useMessage,
 } from 'naive-ui'
-import { RouteName } from '~/router/name'
-import { CategoryStore } from '~/stores/category'
-import { RESTManager } from '~/utils/rest'
 import { computed, defineComponent, onMounted, reactive, ref, toRaw } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import type { CategoryModel, TagModel } from '~/models/category'
+import type { PostModel } from '~/models/post'
+import type { WriteBaseType } from '~/shared/types/base'
+import type { SelectMixedOption } from 'naive-ui/lib/select/src/interface'
+
 import { Icon } from '@vicons/utils'
 
 import { AiHelperButton } from '~/components/ai/ai-helper'
+import { HeaderActionButton } from '~/components/button/rounded-button'
+import { TextBaseDrawer } from '~/components/drawer/text-base-drawer'
 import { Editor } from '~/components/editor/universal'
-import { HeaderPreviewButton } from '~/components/special-button/preview'
+import { SlidersHIcon, TelegramPlaneIcon } from '~/components/icons'
+import { MaterialInput } from '~/components/input/material-input'
+import { UnderlineInput } from '~/components/input/underline-input'
+import { CopyTextButton } from '~/components/special-button/copy-text-button'
+import { ParseContentButton } from '~/components/special-button/parse-content'
+import {
+  HeaderPreviewButton,
+  PreviewSplitter,
+} from '~/components/special-button/preview'
+import { CrossBellConnectorIndirector } from '~/components/xlog-connect'
+import { WEB_URL } from '~/constants/env'
 import { EmitKeyMap } from '~/constants/keys'
+import { useStoreRef } from '~/hooks/use-store-ref'
+import { ContentLayout } from '~/layouts/content'
+import { RouteName } from '~/router/name'
+import { CategoryStore } from '~/stores/category'
+import { RESTManager } from '~/utils/rest'
 
 import { useMemoPostList } from './hooks/use-memo-post-list'
-import type { WriteBaseType } from 'shared/types/base'
-import type { SelectMixedOption } from 'naive-ui/lib/select/src/interface'
-import type { PostModel } from '~/models/post'
-import type { CategoryModel, TagModel } from '~/models/category'
 
 type PostReactiveType = WriteBaseType & {
   slug: string
@@ -172,14 +177,6 @@ const PostWriteView = defineComponent(() => {
     postListState.refresh()
   })
 
-  watch(
-    () => data,
-    () => {
-      window.dispatchEvent(new CustomEvent(EmitKeyMap.EditDataUpdate))
-    },
-    { deep: true },
-  )
-
   return () => (
     <ContentLayout
       title={id.value ? '修改文章' : '撰写新文章'}
@@ -198,7 +195,7 @@ const PostWriteView = defineComponent(() => {
             }}
           />
 
-          <HeaderPreviewButton getData={() => ({ ...data })} />
+          <HeaderPreviewButton iframe data={data} />
           <HeaderActionButton
             icon={<TelegramPlaneIcon />}
             onClick={handleSubmit}
@@ -225,7 +222,7 @@ const PostWriteView = defineComponent(() => {
       ></MaterialInput>
 
       <div class={'flex items-center py-3 text-gray-500'}>
-        <label class="prefix">{`${WEB_URL}/${category.value.slug}/`}</label>
+        <label class="prefix">{`${WEB_URL}/posts/${category.value.slug}/`}</label>
 
         <UnderlineInput
           class="ml-2"
@@ -238,17 +235,24 @@ const PostWriteView = defineComponent(() => {
         {(!data.title || !data.slug) && data.text.length > 0 && (
           <AiHelperButton reactiveData={data} />
         )}
+        {!!data.slug && (
+          <CopyTextButton
+            text={`${WEB_URL}/posts/${category.value.slug}/${data.slug}`}
+          />
+        )}
       </div>
 
       <CrossBellConnectorIndirector />
-      <Editor
-        key={data.id}
-        loading={!!(id.value && typeof data.id == 'undefined')}
-        onChange={(v) => {
-          data.text = v
-        }}
-        text={data.text}
-      />
+      <PreviewSplitter>
+        <Editor
+          key={data.id}
+          loading={!!(id.value && typeof data.id == 'undefined')}
+          onChange={(v) => {
+            data.text = v
+          }}
+          text={data.text}
+        />
+      </PreviewSplitter>
 
       {/* Drawer  */}
       <TextBaseDrawer

@@ -1,25 +1,29 @@
-import { WEB_URL } from '~/constants/env'
+import { isString } from 'lodash-es'
+import { NFormItem, NInputNumber, useMessage } from 'naive-ui'
+import { computed, defineComponent, onMounted, reactive, ref, toRaw } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import type { PageModel } from '~/models/page'
+import type { WriteBaseType } from '~/shared/types/base'
+
+import { Icon } from '@vicons/utils'
+
 import { HeaderActionButton } from '~/components/button/rounded-button'
 import { TextBaseDrawer } from '~/components/drawer/text-base-drawer'
+import { Editor } from '~/components/editor/universal'
 import { SlidersHIcon, TelegramPlaneIcon } from '~/components/icons'
 import { MaterialInput } from '~/components/input/material-input'
 import { UnderlineInput } from '~/components/input/underline-input'
 import { ParseContentButton } from '~/components/special-button/parse-content'
+import {
+  HeaderPreviewButton,
+  PreviewSplitter,
+} from '~/components/special-button/preview'
+import { WEB_URL } from '~/constants/env'
+import { EmitKeyMap } from '~/constants/keys'
 import { useParsePayloadIntoData } from '~/hooks/use-parse-payload'
 import { ContentLayout } from '~/layouts/content'
-import { isString } from 'lodash-es'
-import { NFormItem, NInputNumber, useMessage } from 'naive-ui'
 import { RouteName } from '~/router/name'
 import { RESTManager } from '~/utils/rest'
-import { computed, defineComponent, onMounted, reactive, ref, toRaw } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { Icon } from '@vicons/utils'
-
-import { Editor } from '~/components/editor/universal'
-import { HeaderPreviewButton } from '~/components/special-button/preview'
-import { EmitKeyMap } from '~/constants/keys'
-import type { WriteBaseType } from 'shared/types/base'
-import type { PageModel } from '~/models/page'
 
 type PageReactiveType = WriteBaseType & {
   subtitle: string
@@ -103,13 +107,6 @@ const PageWriteView = defineComponent(() => {
 
     router.push({ name: RouteName.ListPage, hash: '|publish' })
   }
-  watch(
-    () => data,
-    () => {
-      window.dispatchEvent(new CustomEvent(EmitKeyMap.EditDataUpdate))
-    },
-    { deep: true },
-  )
 
   return () => (
     <ContentLayout
@@ -128,7 +125,7 @@ const PageWriteView = defineComponent(() => {
             }}
           />
 
-          <HeaderPreviewButton getData={() => ({ ...data })} />
+          <HeaderPreviewButton iframe data={data} />
 
           <HeaderActionButton
             icon={<TelegramPlaneIcon />}
@@ -172,15 +169,16 @@ const PageWriteView = defineComponent(() => {
           onChange={(e) => void (data.slug = e)}
         ></UnderlineInput>
       </div>
-
-      <Editor
-        key={data.id}
-        loading={!!(id.value && typeof data.id == 'undefined')}
-        onChange={(v) => {
-          data.text = v
-        }}
-        text={data.text}
-      />
+      <PreviewSplitter>
+        <Editor
+          key={data.id}
+          loading={!!(id.value && typeof data.id == 'undefined')}
+          onChange={(v) => {
+            data.text = v
+          }}
+          text={data.text}
+        />
+      </PreviewSplitter>
 
       {/* Drawer  */}
 

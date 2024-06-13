@@ -1,5 +1,64 @@
 # CHANGELOG
 
+## [4.5.2](https://github.com/mx-space/mx-admin/compare/v4.5.1...v4.5.2) (2024-06-09)
+
+
+### Features
+
+* split preview ([b64c807](https://github.com/mx-space/mx-admin/commit/b64c80791c262d33a13e66056af8f1e9668bd974))
+
+
+
+## [4.5.1](https://github.com/mx-space/mx-admin/compare/v4.5.0...v4.5.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* add yaml parse err message ([#911](https://github.com/mx-space/mx-admin/issues/911)) ([7022b67](https://github.com/mx-space/mx-admin/commit/7022b67a1a8565dd71b565e71f3f1e369303f2db))
+* monaco style ([5a5c3d1](https://github.com/mx-space/mx-admin/commit/5a5c3d1a4762b9ba06ba3db5c77015b02c2d5b12))
+
+
+### Features
+
+* add copy link button ([0444628](https://github.com/mx-space/mx-admin/commit/0444628af1cf158dfb51238cec671663501d1abc))
+
+
+
+# [4.5.0](https://github.com/mx-space/mx-admin/compare/v4.4.4...v4.5.0) (2024-05-19)
+
+
+### Bug Fixes
+
+* custom app color ([e6e7f7b](https://github.com/mx-space/mx-admin/commit/e6e7f7b14eb2682b85ef7bb607f6ec2707e2c649))
+
+
+
+## [4.4.4](https://github.com/mx-space/mx-admin/compare/v4.4.3...v4.4.4) (2024-05-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency canvas-confetti to v1.9.3 ([#904](https://github.com/mx-space/mx-admin/issues/904)) ([16639b1](https://github.com/mx-space/mx-admin/commit/16639b10f36b98fabaeb8800714d4a6aae81bf3f))
+* **deps:** update dependency crossbell.js to v1.11.9 ([#891](https://github.com/mx-space/mx-admin/issues/891)) ([07368b9](https://github.com/mx-space/mx-admin/commit/07368b9cec4c911310d94911dbda033e4b80b2c2))
+* refresh button color ([c7ca0cc](https://github.com/mx-space/mx-admin/commit/c7ca0ccc0e359c57928232db41d58f60fb39fe94))
+
+
+### Features
+
+* title link with token query ([752cf94](https://github.com/mx-space/mx-admin/commit/752cf94c0051eecd10c2dcc7fde8a46c5652ceb9))
+
+
+
+## [4.4.3](https://github.com/mx-space/mx-admin/compare/v4.4.2...v4.4.3) (2024-05-09)
+
+
+### Bug Fixes
+
+* align center ([351a556](https://github.com/mx-space/mx-admin/commit/351a556c86d008fa2a979a46884b1edae634eb66))
+* kaomoji button type ([fe257c3](https://github.com/mx-space/mx-admin/commit/fe257c3bc566f251a24bc647db6ea0e7bb0f5493))
+
+
+
 ## [4.4.2](https://github.com/mx-space/mx-admin/compare/v4.4.1...v4.4.2) (2024-05-05)
 
 

@@ -1,23 +1,27 @@
-import { PortalInjectKey } from '~/hooks/use-portal-element'
 import {
-  NConfigProvider,
-  NDialogProvider,
-  NMessageProvider,
-  NNotificationProvider,
   darkTheme,
   dateZhCN,
   lightTheme,
+  NConfigProvider,
+  NDialogProvider,
+  NElement,
+  NMessageProvider,
+  NNotificationProvider,
   useDialog,
   useMessage,
   useNotification,
+  useThemeVars,
   zhCN,
 } from 'naive-ui'
 import { defineComponent, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
+import type { VNode } from 'vue'
+
+import { PortalInjectKey } from '~/hooks/use-portal-element'
 
 import { ThemeColorConfig } from '../theme.config'
 import { useUIStore } from './stores/ui'
-import type { VNode } from 'vue'
+import { colorRef } from './utils/color'
 
 const Root = defineComponent({
   name: 'RootView',
@@ -70,14 +74,17 @@ const App = defineComponent({
           locale={zhCN}
           dateLocale={dateZhCN}
           themeOverrides={{
-            common: ThemeColorConfig,
+            common: colorRef.value,
           }}
           theme={naiveUIDark ? darkTheme : isDark ? darkTheme : lightTheme}
         >
           <NNotificationProvider>
             <NMessageProvider>
               <NDialogProvider>
-                <Root />
+                <AccentColorInjector />
+                <NElement>
+                  <Root />
+                </NElement>
               </NDialogProvider>
             </NMessageProvider>
           </NNotificationProvider>
@@ -87,5 +94,28 @@ const App = defineComponent({
   },
 })
 
+const AccentColorInjector = defineComponent({
+  setup() {
+    const vars = useThemeVars()
+    watchEffect(() => {
+      const { primaryColor, primaryColorHover, primaryColorSuppl } = vars.value
+
+      document.documentElement.style.setProperty(
+        '--color-primary',
+        primaryColor,
+      )
+      document.documentElement.style.setProperty(
+        '--color-primary-shallow',
+        primaryColorHover,
+      )
+      document.documentElement.style.setProperty(
+        '--color-primary-deep',
+        primaryColorSuppl,
+      )
+    })
+
+    return () => null
+  },
+})
 // eslint-disable-next-line import/no-default-export
 export default App
